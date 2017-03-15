@@ -25,11 +25,11 @@ int main(int argc, char const *argv[]) {
 	
 	// Expects argc to be 4 
 	if(argc < 4){
-		cout << "Program usage is: program1 <filex.txt> <filey.txt> <output1.txt>" << endl;
+		cout << "Program usage is: ./program1 <filex.txt> <filey.txt> <output1.txt>" << endl;
 		exit(1);
 	}
 
-	ifstream xfile, yfile, ofile; // input and output files
+	ifstream xfile, yfile; // input and output files
 	string xline, yline; // input strings
 
 	xfile.open(argv[1]); // assumes argv[1] is file containing x
@@ -99,10 +99,12 @@ int main(int argc, char const *argv[]) {
 		// print the actual LCS
 		int x = xlength, y = ylength;
 		string lcs = "";
-		while(x >= 0 && y >= 0){
+		while (x >= 0 && y >= 0) {
 			if(lookup_table[x][y].direction == '>'){
 				lcs = xline[x-1] + lcs; // match at this index
 				x--, y--;
+
+			// no match, find previous index
 			}else if(lookup_table[x][y].direction == '<'){
 				y--;
 			}else{
@@ -118,6 +120,7 @@ int main(int argc, char const *argv[]) {
 
 	// output the running time
 	of << span.count() << endl;
+
 	of.close();
 
 	return 0;

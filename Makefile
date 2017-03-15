@@ -24,7 +24,17 @@ program3.o:	program3.cpp
 clean:
 	rm -f *.o program1 program2 program3
 
+# compile and tun all 3 programs. args should be provided through command line
+# as args='<filex> <filey>'
 run: p1 p2 p3
 	./program1 ${args} output1.txt
 	./program2 ${args} output2.txt
 	./program3 ${args} output3.txt
+
+submit:	clean
+	mkdir brisk_jacob
+	cp *.cpp brisk_jacob
+	cp Makefile brisk_jacob
+	cp readme* brisk_jacob
+	zip -r brisk_jacob.zip brisk_jacob
+	rm -r brisk_jacob
